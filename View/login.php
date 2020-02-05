@@ -3,11 +3,16 @@
     <head></head>
     <body>
         <?php
+        include 'View/title.php'; // print titles
+        
+        // check for login errors and print message if they exist
         if (isset($loginError) && $loginError) {
             echo "Invalid username or password, please try again.";
         }
         ?>
         
+        <!--    log in form
+                calls upload when button is pressed and posts username and password-->
         <form name="loginForm" id="loginForm" action="index.php?upload" method="POST">
             <p>
                 <label for="username">Username</label>

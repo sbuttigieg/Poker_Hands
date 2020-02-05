@@ -1,16 +1,21 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once 'DB.php';
 
-/**
- * Description of Model
- *
- * @author super
- */
 class Model {
-    //put your code here
+    private $conn;
+    
+    public function __construct(){
+        $this->conn = DB::getInstance();
+    }
+    
+    public function checkLogin($username, $password) {
+        $hashed = sha1($password);
+        $st = $this->conn->getHandler()->prepare("SELECT * FROM admin WHERE username = :u AND password = :p");
+        $st->bindParam(':u', $username);
+        $st->bindParam(':p', $hashed);
+        $st->execute();
+        $result = $st->fetch(PDO::FETCH_OBJ);
+        return $result != null;   //returns true or false
+    }
 }

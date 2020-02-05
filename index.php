@@ -10,7 +10,6 @@ require_once 'Controller/Controller.php';
     </head>
     <body>
         <?php
-        include 'View/title.php';
         $controller = new Controller();
         $controller->invoke();
         ?>

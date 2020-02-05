@@ -12,10 +12,22 @@ class Controller {
     }
     
     public function invoke() {
-        if (isset($_GET['results'])){
+        if ((isset($_GET['results']))&&(isset($_SESSION['adminUser']))){
             include 'View/results.php';
-        } else if (isset($_GET['upload'])) {
+        } else if ((isset($_GET['upload']))&&(isset($_SESSION['adminUser']))) {
             include 'View/upload.php';
+        } else if (isset($_POST['username']) && isset($_POST['password'])){
+            if ($this->model->checkLogin($_POST['username'], $_POST['password'])) {
+                $_SESSION['adminUser'] = $_POST['username'];
+                include 'View/upload.php';
+            } else {
+                $loginError = true;
+                include 'View/login.php';
+            }
+        } else if (isset($_GET['logout'])) {
+            session_destroy();
+            $_SESSION = array();
+            include 'View/login.php';
         } else {
             // Show login screen
             include 'View/login.php';
