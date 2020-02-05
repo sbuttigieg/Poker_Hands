@@ -8,7 +8,7 @@
         }
         ?>
         
-        <form name="loginForm" id="loginForm" action="index.php?admin" method="POST">
+        <form name="loginForm" id="loginForm" action="index.php?upload" method="POST">
             <p>
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username">

@@ -14,7 +14,7 @@ class Controller {
     public function invoke() {
         if (isset($_GET['results'])){
             include 'View/results.php';
-        } else if (isset($_GET['admin'])) {
+        } else if (isset($_GET['upload'])) {
             include 'View/upload.php';
         } else {
             // Show login screen
