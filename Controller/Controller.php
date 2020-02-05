@@ -13,5 +13,7 @@ class Controller {
     
     public function invoke() {
         
+        // Show login screen
+        include 'View/login.php';
     }
 }
