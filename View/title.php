@@ -1,4 +1,6 @@
 <h1>POKER HANDS</h1>
+<h2>Who's the winner?</h2>
+
 <?php 
 // if not logged in (adminUser is not set in Session)
     // Sub-Title = Login
@@ -6,9 +8,9 @@
     // Sub-Title = The results are:
 // else use standard Sub-Title (Who's the winner?)
 if (!isset($_SESSION['adminUser'])){
-    echo "<h2>Login</h2>";
+    echo "<h3>Login</h3>";
 } else if (isset($_GET['results'])){
-    echo "<h2>The results are:</h2>";
+    echo "<h3>The results are:</h3>";
 } else {
-    echo "<h2>Who's the winner?</h2>";
+    echo "<h3>Upload file</h3>";
 }
