@@ -29,51 +29,43 @@
     }
 ?>
 
-<!--<!DOCTYPE html>
-<html>
-    <head></head>
-    <body>    -->
-        <?php 
-        include 'View/title.php'; // print titles
-        
-        // Show if upload was successful
-        if (isset($destFile) && $validFile == true) {
-            echo "File successfully uploaded";
-        } else if ($validFile == false){
-            echo 'Invalid file format';
-        }
-        
-        //Show "Choose File" and "Upload" buttons if file not uploaded
-        if (!isset($_SESSION['destFile'])){?>
-            <form enctype="multipart/form-data" method="POST">
-                <input name='fileToProcess' type='file' accept=".txt">
-                <br>
-                <input type='submit' value='Upload'>
-            </form>
-        <br><br>
-        <?php }
-        
-        // If file has been uploaded, show "See Results" button
-        // Calls "results" if pressed
-        if (isset($_SESSION['destFile'])){?>
-            <form name="resultsForm" id="resultsForm" action="index.php?results" method="POST">
-                <button type="submit" >See Results</button>
-            </form>
-        <?php }?> 
-        
-        <?php
-        
-        // If user is logged in, show "Logout" button
-        // Calls logout if pressed
-        if (isset($_SESSION['adminUser'])){?>
-            <form name="logoutForm" id="logoutForm" action="index.php?logout" method="POST">
-                <button type="submit" >Logout</button>
-            </form>
-        <?php }?>   
-        
+<?php 
+include 'View/title.php'; // print titles
 
-<!--    </body>
-</html>-->
+// Show if upload was successful
+if (isset($_SESSION['destFile']) && $validFile == true) {
+    echo "File successfully uploaded";
+} else if ($validFile == false){
+    echo 'Invalid file format';
+}
+
+//Show "Choose File" and "Upload" buttons if file not uploaded
+if (!isset($_SESSION['destFile'])){?>
+    <form enctype="multipart/form-data" method="POST">
+        <input name='fileToProcess' type='file' accept=".txt">
+        <br>
+        <input type='submit' value='Upload'>
+    </form>
+<br><br>
+<?php }
+        
+// If file has been uploaded, show "See Results" button
+// Calls "results" if pressed
+if (isset($_SESSION['destFile'])){?>
+    <form name="resultsForm" id="resultsForm" action="index.php?results" method="POST">
+        <button type="submit" >See Results</button>
+    </form>
+<?php }?> 
+
+<?php
+
+// If user is logged in, show "Logout" button
+// Calls logout if pressed
+if (isset($_SESSION['adminUser'])){?>
+    <form name="logoutForm" id="logoutForm" action="index.php?logout" method="POST">
+        <button type="submit" >Logout</button>
+    </form>
+<?php }?>   
 
 <!--//        $row = 1;
 //        if (($handle = fopen($uploadedFile, "r")) !== FALSE) {
