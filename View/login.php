@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<!--<html>
     <head></head>
-    <body>
+    <body>-->
         <?php
         include 'View/title.php'; // print titles
         
@@ -26,6 +26,6 @@
                 <input type="submit" value="Login">
             </p>
         </form>
-    </body>
-</html>
+<!--    </body>
+</html>-->
 

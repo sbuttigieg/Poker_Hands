@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
     <head></head>
-    <body>
+    <body>-->
         <?php include 'View/title.php'; // print titles ?>
         
         <p> I'm in Results </p>
@@ -14,5 +14,5 @@
                 <button type="submit">Logout</button>
             </form>
         <?PHP }?>
-    </body>
-</html>
+<!--    </body>
+</html>-->
