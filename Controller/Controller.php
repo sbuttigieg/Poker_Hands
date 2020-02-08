@@ -14,14 +14,6 @@ class Controller {
     public function invoke() {
         if ((isset($_GET['results']))&&(isset($_SESSION['adminUser']))&&(isset($_SESSION['destFile']))){
             include 'View/results.php';
-//            if (($handle = fopen($_SESSION['destfile'], "r")) !== FALSE) {
-//                while (($data = fgetcsv($handle, 30, " ")) !== FALSE) {
-//                    $row++;
-//                    print_r($data);
-//                    echo "<br>";
-//                }
-//            }
-//            fclose($handle);
         } else if ((isset($_GET['upload']))&&(isset($_SESSION['adminUser']))) {
             include 'View/upload.php';
         } else if (isset($_POST['username']) && isset($_POST['password'])){
@@ -37,6 +29,7 @@ class Controller {
             session_destroy();
             $_SESSION = array();
             $_GET = array();
+            $this->model->clearResults();
             include 'View/login.php';
         } else {
             // Show login screen

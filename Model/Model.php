@@ -34,4 +34,9 @@ class Model {
         $st->bindParam(':10', $results[9]);
         $st->execute();
     }
+    
+    public function clearResults() {
+        $st = $this->conn->getHandler()->prepare("TRUNCATE TABLE results");
+        $st->execute();
+    }
 }
