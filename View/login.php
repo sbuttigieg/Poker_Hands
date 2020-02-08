@@ -5,6 +5,16 @@
         <?php
         include 'View/title.php'; // print titles
         
+        if (isset($_SESSION['adminUser'])){
+            if (isset($_SESSION['destFile'])){
+                unlink($_SESSION['destFile']);
+                unset ($_SESSION['destFile']);
+            }
+            session_destroy();
+            $_SESSION = array();
+            $_GET = array();
+        }
+        
         // check for login errors and print message if they exist
         if (isset($loginError) && $loginError) {
             echo "Invalid username or password, please try again.";
