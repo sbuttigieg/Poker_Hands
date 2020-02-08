@@ -59,7 +59,7 @@
             <form name="resultsForm" id="resultsForm" action="index.php?results" method="POST">
                 <button type="submit" >See Results</button>
             </form>
-        <?PHP }?> 
+        <?php }?> 
         
         <?php
         
@@ -69,7 +69,7 @@
             <form name="logoutForm" id="logoutForm" action="index.php?logout" method="POST">
                 <button type="submit" >Logout</button>
             </form>
-        <?PHP }?>   
+        <?php }?>   
         
 
 <!--    </body>

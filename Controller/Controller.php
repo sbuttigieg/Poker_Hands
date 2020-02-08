@@ -15,6 +15,7 @@ class Controller {
         if ((isset($_GET['results']))&&(isset($_SESSION['adminUser']))&&(isset($_SESSION['destFile']))){
             include 'View/results.php';
         } else if ((isset($_GET['upload']))&&(isset($_SESSION['adminUser']))) {
+            unset ($_SESSION['destFile']);
             include 'View/upload.php';
         } else if (isset($_POST['username']) && isset($_POST['password'])){
             if ($this->model->checkLogin($_POST['username'], $_POST['password'])) {

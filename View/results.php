@@ -62,6 +62,14 @@ if (($handle = fopen($_SESSION['destFile'], "r")) !== FALSE) {
     }
 }
 fclose($handle);
+?>
+
+<!--If file has been uploaded, show "See Results" button
+Calls "results" if pressed-->
+<form name="uploadForm" id="uploadForm" action="index.php?upload" method="POST">
+    <button type="submit" >Upload another file</button>
+</form>
+<?php 
 
 // if user is logged in, show logout button
 // calls logout when button is pressed  
@@ -69,4 +77,4 @@ if (isset($_SESSION['adminUser'])){?>
     <form name="logoutForm" id="logoutForm" action="index.php?logout" method="POST">
         <button type="submit">Logout</button>
     </form>
-<?PHP }?>
+<?php }
