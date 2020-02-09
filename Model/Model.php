@@ -39,4 +39,17 @@ class Model {
         $st = $this->conn->getHandler()->prepare("TRUNCATE TABLE results");
         $st->execute();
     }
+    
+    public function getResults($playerNumber) {
+        if ($playerNumber == 1){
+            $st = $this->conn->getHandler()->prepare("SELECT card1, card2, card3, card4, card5 FROM results");
+        } else if ($playerNumber == 2){
+            $st = $this->conn->getHandler()->prepare("SELECT card6, card7, card8, card9, card10 FROM results");
+        }
+        $st->execute();
+        $result = $st->fetchAll(PDO::FETCH_NUM);
+        echo "<br>Model<br>";
+        print_r($result);
+        return $result;
+    }
 }

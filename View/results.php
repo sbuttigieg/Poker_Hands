@@ -62,6 +62,16 @@ if (($handle = fopen($_SESSION['destFile'], "r")) !== FALSE) {
     }
 }
 fclose($handle);
+
+// Get Scores for players
+$scores1 = $this->model->getResults(1);
+$scores2 = $this->model->getResults(2);
+echo "<br>Results p1<br>";
+var_dump($scores1[0][0]);
+var_dump($scores1[1][4]);
+echo "<br>Results p2<br>";
+var_dump($scores2[0][0]);
+var_dump($scores2[1][4]);
 ?>
 
 <!--If file has been uploaded, show "See Results" button
