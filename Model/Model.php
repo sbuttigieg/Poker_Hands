@@ -48,8 +48,6 @@ class Model {
         }
         $st->execute();
         $result = $st->fetchAll(PDO::FETCH_NUM);
-        echo "<br>Model<br>";
-        print_r($result);
         return $result;
     }
 }
