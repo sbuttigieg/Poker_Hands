@@ -1,0 +1,3 @@
+This Folder is used for storing temporary files.
+Each time the user exits the page or logs out, the files will be automatically deleted.
+If the page is exited abruptly, the files are deleted on the next login.

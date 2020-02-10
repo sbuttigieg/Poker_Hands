@@ -2,15 +2,6 @@ CREATE DATABASE pokerhands;
 
 USE pokerhands;
 
-CREATE TABLE scores (
-	id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    ranking1 int(2) NOT NULL,
-    highcard1 int(2) NOT NULL,
-    ranking2 int(2) NOT NULL,
-    highcard2 int(2) NOT NULL,
-    winner CHAR(7) NOT NULL
-);
-
 CREATE TABLE results (
 	card1 CHAR(2) NOT NULL,
     card2 CHAR(2) NOT NULL,

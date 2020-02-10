@@ -8,7 +8,7 @@
                 <h2 class="text-center" style="color:white;">Who's the winner?</h2>
         </div>
         <div class="col-md-4 align-self-center">
-            <img class="float-right align-middle" src="View/img/poker-hands-100x82.jpg" alt="Poker Hand" height="82" width="100">
+            <img class="float-right align-middle" src="View/img/poker-hands-m-100x82.jpg" alt="Poker Hand" height="82" width="100">
         </div>
     </div>
 </div>
