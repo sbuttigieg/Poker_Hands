@@ -6,13 +6,15 @@ include 'View/title.php'; // print titles
 function checkData($data){
     // check there are 10 cards in a row
     if (count($data)!==10){
-        echo "<br>Count: ". count($data);
+        echo "<h6 class=\"text-center\" style=\"color:red;\">"
+            . count($data) . " cards in a hand<h6>";
         return false;
     }
     for ($x=0; $x<=9; $x++){
         // check that each card contains 2 characters 
         if (strlen($data[$x]) !==2){
-            echo "<br>$data[$x] Length: ". strlen($data[$x]);
+            echo "<h6 class=\"text-center\" style=\"color:red;\">"
+                . "Incorrect card defined (".$data[$x].")<h6>";
             return false;
         }
         // check that the value of the card is 2 to 9, T, J, Q, K, A
@@ -35,7 +37,8 @@ function checkValue($value){
             || ($value == "Q")|| ($value == "K")|| ($value == "A")){
         return true;
     } else {
-        echo "<br>Value $value is not ok";
+        echo "<h6 class=\"text-center\" style=\"color:red;\">"
+            . "Incorrect card value defined (".$value.")<h6>";
         return false;
     }
 }
@@ -45,7 +48,8 @@ function checkSuit($suit){
     if (($suit == "S") || ($suit == "H") || ($suit == "D")|| ($suit == "C")){
         return true;
     } else {
-        echo "<br>Suit $suit is not ok";
+        echo "<h6 class=\"text-center\" style=\"color:red;\">"
+            . "Incorrect Suit defined (".$suit.")<h6>";
         return false;
     }
 }
@@ -158,7 +162,6 @@ function rankingDuplicates($hand){
 function getScore($hand){
     $handValue = getValue($hand); // Derive sorted array with values only
     $handSuit = getSuit($hand); // Derive array with suits only
-    for ($a = 0; $a < count($hand); $a++ ){echo "$hand[$a] ";} //show hand
     // check for duplicates. If there are, run duplicates algorithm
     if (hasDuplicates($handValue)){
         return rankingDuplicates($handValue);
@@ -197,6 +200,22 @@ function gameWinner($scorePlayer1, $scorePlayer2){
     return $winner;
 }
 
+function tableData($rankList, $rank){
+    switch($rank) {
+        case "RF": $result = count( array_keys( $rankList, "1" )); break;
+        case "SF": $result = count( array_keys( $rankList, "2" )); break;
+        case "FK": $result = count( array_keys( $rankList, "3" )); break;
+        case "FH": $result = count( array_keys( $rankList, "4" )); break;
+        case "FL": $result = count( array_keys( $rankList, "5" )); break;
+        case "ST": $result = count( array_keys( $rankList, "6" )); break;
+        case "TK": $result = count( array_keys( $rankList, "7" )); break;
+        case "TP": $result = count( array_keys( $rankList, "8" )); break;
+        case "OP": $result = count( array_keys( $rankList, "9" )); break;
+        case "HC": $result = count( array_keys( $rankList, "10" )); break;
+        default: 0;
+    }
+    return $result;
+}
 ///////////////////////////END OF FUNCTIONS///////////////////////////
 
 // Read the uploaded file and check validity.
@@ -204,7 +223,8 @@ function gameWinner($scorePlayer1, $scorePlayer2){
 if (($handle = fopen($_SESSION['destFile'], "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 30, " ")) !== FALSE) {
         if (!checkData($data)){
-            echo "<br>Wrong Data";
+            echo "<h6 class=\"text-center\" style=\"color:red;\">"
+                . "Wrong Data<h6>";
             break;
         }
         $this->model->saveResults($data);
@@ -227,13 +247,10 @@ for ($a = 0; $a < count($resultsPlayer1); $a++ ){
     $scorePlayer1 = getScore($resultsPlayer1[$a]);
     $scoreList1[] = $scorePlayer1;
     $rankList[] = $scorePlayer1[0];
-    echo "<br>Score is $scorePlayer1[0], $scorePlayer1[1], $scorePlayer1[2]<br>";
     $scorePlayer2 = getScore($resultsPlayer2[$a]);
     $scoreList2[] = $scorePlayer2;
     $rankList[] = $scorePlayer2[0];
-    echo "<br>Score is $scorePlayer2[0], $scorePlayer2[1], $scorePlayer2[2]<br>";
     $winner = gameWinner($scorePlayer1, $scorePlayer2);
-    echo "Winner is player $winner<br><br>";
     // count wins
     if ($winner == 1){
         $countP1++;
@@ -241,43 +258,107 @@ for ($a = 0; $a < count($resultsPlayer1); $a++ ){
         $countP2++;
     } else {$countP0++;}
 }
-var_dump($scoreList2);
-echo "Player1: $countP1 Player2: $countP2 Draw: $countP0<br><br>";
-
-$RF  = count( array_keys( $rankList, "1" ));
-$SF  = count( array_keys( $rankList, "2" ));
-$FK  = count( array_keys( $rankList, "3" ));
-$FH  = count( array_keys( $rankList, "4" ));
-$FL  = count( array_keys( $rankList, "5" ));
-$ST  = count( array_keys( $rankList, "6" ));
-$TK  = count( array_keys( $rankList, "7" ));
-$TP  = count( array_keys( $rankList, "8" ));
-$OP  = count( array_keys( $rankList, "9" ));
-$HC  = count( array_keys( $rankList, "10" ));
-
-echo "<br>Royal Flush      : $RF";
-echo "<br>Straight Flush   : $SF";
-echo "<br>Four of a Kind   : $FK";
-echo "<br>Full House       : $FH";
-echo "<br>Flush            : $FL";
-echo "<br>Straight         : $ST";
-echo "<br>Three of a Kind  : $TK";
-echo "<br>Two Pair         : $TP";
-echo "<br>One Pair         : $OP";
-echo "<br>High Card        : $HC";
 ?>
-
-<!--If file has been uploaded, show "Upload another file" button
-Calls "upload" if pressed-->
-<form name="uploadForm" id="uploadForm" action="index.php?upload" method="POST">
-    <button type="submit" >Upload another file</button>
-</form>
-<?php 
-
-// if user is logged in, show logout button
-// calls logout when button is pressed  
-if (isset($_SESSION['adminUser'])){?>
-    <form name="logoutForm" id="logoutForm" action="index.php?logout" method="POST">
-        <button type="submit">Logout</button>
-    </form>
-<?php }
+<div class="row">
+    <div class="col-md-3"></div>  
+    <div class="col-md-6">
+        <div class="table-responsive">
+            <table class="table-sm table-bordered table-striped thead-dark w-100">
+                <thead>
+                    <tr>
+                        <th>Player 1</th>
+                        <th class ="text-center"><?php echo "$countP1 wins" ?></th>
+                        <th>Player 2</th>
+                        <th class ="text-center"><?php echo "$countP2 wins" ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="4"> </td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<div class="row">
+    <div class="col-md-3"></div>  
+    <div class="col-md-6">
+        <div class="table-responsive">
+            <table class="table-sm table-bordered table-striped thead-dark w-100">
+                <thead>
+                    <tr>
+                        <th>Ranking</th><th>Occurrences</th>
+                        <th>Ranking</th><th>Occurrences</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Royal Flush</td>
+                        <td class ="text-center"><?php echo tableData($rankList, "RF") ?></td>
+                        <td>Straight</td>
+                        <td class ="text-center"><?php echo tableData($rankList, "ST") ?></td>
+                    </tr>
+                    <tr>
+                        <td>Straight Flush</td>
+                        <td class ="text-center"><?php echo tableData($rankList, "SF") ?></td>
+                        <td>Three of a Kind</td>
+                        <td class ="text-center"><?php echo tableData($rankList, "TK") ?></td>
+                    </tr>
+                    <tr>
+                        <td>Four of a Kind</td>
+                        <td class ="text-center"><?php echo tableData($rankList, "FK") ?></td>
+                        <td>Two Pair</td>
+                        <td class ="text-center"><?php echo tableData($rankList, "TP") ?></td>
+                    </tr>
+                    <tr>
+                        <td>Full House</td>
+                        <td class ="text-center"><?php echo tableData($rankList, "FH") ?></td>
+                        <td>One Pair</td>
+                        <td class ="text-center"><?php echo tableData($rankList, "OP") ?></td>
+                    </tr>
+                    <tr>
+                        <td>Flush</td>
+                        <td class ="text-center"><?php echo tableData($rankList, "FL") ?></td>
+                        <td>High Card</td>
+                        <td class ="text-center"><?php echo tableData($rankList, "HC") ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<div class="row" style="height:30px;"></div>
+<div class="row">
+    <div class="col-md-4"></div>  
+    <div class="col-md-4">
+        <?php
+        // If file has been uploaded, show "Upload another file" button
+        // Calls "upload" if pressed
+        if (isset($_SESSION['destFile'])){?>
+            <form role="form" name="uploadForm" id="uploadForm" 
+                  action="index.php?upload" method="POST">
+                <button class="form-control btn btn-primary text-white"
+                        type="submit" >Upload another file</button>
+            </form>
+        <?php }?> 
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<div class="row" style="height:30px;"></div>
+<div class="row">
+    <div class="col-md-4"></div>  
+    <div class="col-md-4">
+        <?php
+        // If user is logged in, show "Logout" button
+        // Calls logout if pressed
+        if (isset($_SESSION['adminUser'])){?>
+            <form name="logoutForm" id="logoutForm" action="index.php?logout" 
+                  method="POST">
+                <button class="bg-dark form-control btn btn-primary text-white" 
+                        type="submit" >Logout</button>
+            </form>
+        <?php }?> 
+    </div>
+    <div class="col-md-4"></div>
+</div>

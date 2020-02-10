@@ -20,7 +20,6 @@ if (isset($_SESSION['adminUser'])){
                 username and password   -->
         <form class="form-signin" name="loginForm" id="loginForm" 
             action="index.php?upload" method="POST">
-                <h4 class="form-signin-heading text-center">Please sign in</h4>
                 <label class="sr-only" for="username">Username</label>
                 <input class="form-control" placeholder="Username" 
                        required autofocus type="text" id="username" 
