@@ -218,38 +218,42 @@ $resultsPlayer2 = $this->model->getResults(2);
 
 // reset win counters
 $countP0 = $countP1 = $countP2 = 0;
-$scoreList[] = 0;
-
+$scoreList1 = [];
+$scoreList2 = [];
+$rankList = [];
 
 // Get score for each hand
 for ($a = 0; $a < count($resultsPlayer1); $a++ ){
     $scorePlayer1 = getScore($resultsPlayer1[$a]);
-    $scoreList[] = $scorePlayer1[0];
+    $scoreList1[] = $scorePlayer1;
+    $rankList[] = $scorePlayer1[0];
     echo "<br>Score is $scorePlayer1[0], $scorePlayer1[1], $scorePlayer1[2]<br>";
     $scorePlayer2 = getScore($resultsPlayer2[$a]);
-    $scoreList[] = $scorePlayer2[0];
+    $scoreList2[] = $scorePlayer2;
+    $rankList[] = $scorePlayer2[0];
     echo "<br>Score is $scorePlayer2[0], $scorePlayer2[1], $scorePlayer2[2]<br>";
     $winner = gameWinner($scorePlayer1, $scorePlayer2);
     echo "Winner is player $winner<br><br>";
-// count wins
-if ($winner == 1){
-    $countP1++;
-} else if ($winner == 2){
-    $countP2++;
-} else {$countP0++;}
+    // count wins
+    if ($winner == 1){
+        $countP1++;
+    } else if ($winner == 2){
+        $countP2++;
+    } else {$countP0++;}
 }
+var_dump($scoreList2);
 echo "Player1: $countP1 Player2: $countP2 Draw: $countP0<br><br>";
 
-$RF  = count( array_keys( $scoreList, "1" ));
-$SF  = count( array_keys( $scoreList, "2" ));
-$FK  = count( array_keys( $scoreList, "3" ));
-$FH  = count( array_keys( $scoreList, "4" ));
-$FL  = count( array_keys( $scoreList, "5" ));
-$ST  = count( array_keys( $scoreList, "6" ));
-$TK  = count( array_keys( $scoreList, "7" ));
-$TP  = count( array_keys( $scoreList, "8" ));
-$OP  = count( array_keys( $scoreList, "9" ));
-$HC  = count( array_keys( $scoreList, "10" ));
+$RF  = count( array_keys( $rankList, "1" ));
+$SF  = count( array_keys( $rankList, "2" ));
+$FK  = count( array_keys( $rankList, "3" ));
+$FH  = count( array_keys( $rankList, "4" ));
+$FL  = count( array_keys( $rankList, "5" ));
+$ST  = count( array_keys( $rankList, "6" ));
+$TK  = count( array_keys( $rankList, "7" ));
+$TP  = count( array_keys( $rankList, "8" ));
+$OP  = count( array_keys( $rankList, "9" ));
+$HC  = count( array_keys( $rankList, "10" ));
 
 echo "<br>Royal Flush      : $RF";
 echo "<br>Straight Flush   : $SF";
@@ -263,8 +267,8 @@ echo "<br>One Pair         : $OP";
 echo "<br>High Card        : $HC";
 ?>
 
-<!--If file has been uploaded, show "See Results" button
-Calls "results" if pressed-->
+<!--If file has been uploaded, show "Upload another file" button
+Calls "upload" if pressed-->
 <form name="uploadForm" id="uploadForm" action="index.php?upload" method="POST">
     <button type="submit" >Upload another file</button>
 </form>
