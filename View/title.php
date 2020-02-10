@@ -1,14 +1,14 @@
 <div style="background-color: black;" class="page-header">
     <div class="row">
         <div class="col-md-4 align-self-center">
-            <img class="float-left" src="img/poker-hands-100x82.jpg" alt="Poker Hand" height="82" width="100">
+            <img class="float-left" src="View/img/poker-hands-100x82.jpg" alt="Poker Hand" height="82" width="100">
         </div>
         <div class="col-md-4">
                 <h1 class="text-center" style="color:red;">POKER HANDS</h1>
                 <h2 class="text-center" style="color:white;">Who's the winner?</h2>
         </div>
         <div class="col-md-4 align-self-center">
-            <img class="float-right align-middle" src="img/poker-hands-100x82.jpg" alt="Poker Hand" height="82" width="100">
+            <img class="float-right align-middle" src="View/img/poker-hands-100x82.jpg" alt="Poker Hand" height="82" width="100">
         </div>
     </div>
 </div>

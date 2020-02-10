@@ -27,42 +27,75 @@ if (isset($_FILES['fileToProcess']) &&
         $_SESSION['destFile'] = $destFile;
     }
 }
-?>
 
-<?php 
-include 'View/title.php'; // print titles
+include 'View/title.php'; // print titles ?>
 
-// Show if upload was successful
-if (isset($_SESSION['destFile']) && $validFile == true) {
-    echo "File successfully uploaded";
-} else if ($validFile == false){
-    echo 'Invalid file format';
-}
-
-//Show "Choose File" and "Upload" buttons if file not uploaded
-if (!isset($_SESSION['destFile'])){?>
-    <form enctype="multipart/form-data" method="POST">
-        <input name='fileToProcess' type='file' accept=".txt">
+<div class="row">
+    <div class="col-md-4"></div>  
+    <div class="col-md-4">
+        <?php
+        //Show "Choose File" and "Upload" buttons if file not uploaded
+        if (!isset($_SESSION['destFile'])){?>
+            <form class="rounded border border-dark" role="form" 
+                  enctype="multipart/form-data" method="POST">
+                <input class="form-control border-0" name='fileToProcess' 
+                       type='file' accept=".txt">
+                <br>
+                <button class="form-control btn btn-primary text-white" 
+                        type="submit">Upload</button>
+            </form>
         <br>
-        <input type='submit' value='Upload'>
-    </form>
-<br><br>
-<?php }
-        
-// If file has been uploaded, show "See Results" button
-// Calls "results" if pressed
-if (isset($_SESSION['destFile'])){?>
-    <form name="resultsForm" id="resultsForm" action="index.php?results" method="POST">
-        <button type="submit" >See Results</button>
-    </form>
-<?php }?> 
+        <?php }?>
+    </div>
+    <div class="col-md-4"></div>
+</div>
 
-<?php
+<div class="row">
+    <div class="col-md-4"></div>  
+    <div class="col-md-4 align-self-center">
+        <?php
+        // Show whether upload was successful
+        if (isset($_SESSION['destFile']) && $validFile == true) {
+            echo "<h6 class=\"text-center\" style=\"color:red;\">"
+            . "File successfully uploaded";
+        } else if ($validFile == false){
+            echo "<h6 class=\"text-center\" style=\"color:red;\">"
+            . "Invalid file format";
+        }?>
+    </div>
+    <div class="col-md-4"></div>
+</div>
 
-// If user is logged in, show "Logout" button
-// Calls logout if pressed
-if (isset($_SESSION['adminUser'])){?>
-    <form name="logoutForm" id="logoutForm" action="index.php?logout" method="POST">
-        <button type="submit" >Logout</button>
-    </form>
-<?php }?>   
+<div class="row">
+    <div class="col-md-4"></div>  
+    <div class="col-md-4">
+        <?php
+        // If file has been uploaded, show "See Results" button
+        // Calls "results" if pressed
+        if (isset($_SESSION['destFile'])){?>
+            <form role="form" name="resultsForm" id="resultsForm" 
+                  action="index.php?results" method="POST">
+                <button class="form-control btn btn-primary text-white"
+                        type="submit" >See Results</button>
+            </form>
+        <?php }?> 
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<div class="row" style="height:100px;"></div>
+<div class="row">
+    <div class="col-md-4"></div>  
+    <div class="col-md-4">
+        <?php
+        // If user is logged in, show "Logout" button
+        // Calls logout if pressed
+        if (isset($_SESSION['adminUser'])){?>
+            <form name="logoutForm" id="logoutForm" action="index.php?logout" 
+                  method="POST">
+                <button class="bg-dark form-control btn btn-primary text-white" 
+                        type="submit" >Logout</button>
+            </form>
+        <?php }?> 
+    </div>
+    <div class="col-md-4"></div>
+</div>
