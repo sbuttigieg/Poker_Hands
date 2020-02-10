@@ -11,26 +11,31 @@ if (isset($_SESSION['adminUser'])){
     session_destroy();
     $_SESSION = array();
     $_GET = array();
-}
+}?>
 
-// check for login errors and print message if they exist
-if (isset($loginError) && $loginError) {
-    echo "Invalid username or password, please try again.";
-}
-?>
-
-<!--    log in form
-        calls upload when button is pressed and posts username and password-->
-<form name="loginForm" id="loginForm" action="index.php?upload" method="POST">
-    <p>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username">
-    </p>
-    <p>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password">
-    </p>
-    <p>
-        <input type="submit" value="Login">
-    </p>
-</form>
+<div class="row">
+    <div class="col-md-3"></div>  
+    <div class="col-md-6 align-self-center">
+        <!--    log in form that calls upload when button is pressed and posts
+                username and password   -->
+        <form class="form-signin" name="loginForm" id="loginForm" 
+            action="index.php?upload" method="POST">
+                <h4 class="form-signin-heading text-center">Please sign in</h4>
+                <label class="sr-only" for="username">Username</label>
+                <input class="form-control" placeholder="Username" 
+                       required autofocus type="text" id="username" 
+                       name="username">
+                <label class="sr-only" for="password">Password</label>
+                <input class="form-control" placeholder="password" 
+                       required type="password" id="password" name="password">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form> 
+        <?php
+        // check for login errors and print message if they exist
+        if (isset($loginError) && $loginError) {
+            echo "<h6 class=\"text-center\" style=\"color:red;\">"
+                . "Invalid username or password, please try again.<h6>";
+        }?>
+    </div>
+    <div class="col-md-3"></div>
+</div>
