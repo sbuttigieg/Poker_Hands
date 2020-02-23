@@ -20,27 +20,32 @@ class Controller {
         }
     }
     public function invoke() {
-        if ((isset($_GET['results']))&&(isset($_SESSION['adminUser']))&&(isset($_SESSION['destFile']))){
+        if ((null !== (filter_input(INPUT_GET, 'results', FILTER_SANITIZE_STRING)))
+                &&(isset($_SESSION['adminUser']))&&(isset($_SESSION['destFile']))){
             include 'View/results.php';
-        } else if ((isset($_GET['upload']))&&(isset($_SESSION['adminUser']))) {
+        } else if ((null !== (filter_input(INPUT_GET, 'upload', FILTER_SANITIZE_STRING)))
+                &&(isset($_SESSION['adminUser']))) {
             self::cleanExit();
             $this->model->clearResults();
             include 'View/upload.php';
-        } else if (isset($_POST['username']) && isset($_POST['password'])){
-            if ($this->model->checkLogin($_POST['username'], $_POST['password'])) {
-                $_SESSION['adminUser'] = $_POST['username'];
+        } else if (null !== (filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING))
+                && null !== (filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING))){
+            $inputUsr = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+            $inputPwd = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+            if ($this->model->checkLogin($inputUsr, $inputPwd)) {
+                $_SESSION['adminUser'] = $inputUsr;
                 include 'View/upload.php';
             } else {
                 $loginError = true;
-                $_GET = array();
+                $_GET = [];
                 include 'View/login.php';
             }
-        } else if (isset($_GET['logout'])) {
+        } else if (null !== (filter_input(INPUT_GET, 'logout', FILTER_SANITIZE_STRING))) {
             self::cleanExit();
             $this->model->clearResults();
             session_destroy();
-            $_SESSION = array();
-            $_GET = array();
+            $_SESSION = [];
+            $_GET = [];
             include 'View/login.php';
         } else {
             // Show login screen

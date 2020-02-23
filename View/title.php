@@ -18,7 +18,7 @@
 <?php
 if (!isset($_SESSION['adminUser'])){                        // if not logged in
     echo "<h3 class=\"text-center\">Login</h3>";            // Sub-Title = Login
-} else if (isset($_GET['results'])){                        // else if result page is called
+} else if (null !== (filter_input(INPUT_GET, 'results', FILTER_SANITIZE_STRING))){                        // else if result page is called
     echo "<h3 class=\"text-center\">The results are:</h3>"; // Sub-Title = The results are:
 } else {
     echo "<h3 class=\"text-center\">Upload file</h3>";      // else Sub-Title = Upload file

@@ -46,8 +46,4 @@ There is also a shortened version "hands60.txt" that has the first 60 rows inste
 
 In the main folder there is a flowchart for the main flow of the code and one for the result algorithm.
 
-Note:
-On my system that uses XAMPP, loading the "hands.txt" with 1000 rows into the database is quite slow.
-
-
 

@@ -9,8 +9,8 @@ if (isset($_SESSION['adminUser'])){
         unset ($_SESSION['destFile']);
     }
     session_destroy();
-    $_SESSION = array();
-    $_GET = array();
+    $_SESSION = [];
+    $_GET = [];
 }?>
 
 <div class="row">
